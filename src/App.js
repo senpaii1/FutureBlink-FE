@@ -13,7 +13,7 @@ const App = () => {
     const isAuthenticatedResult = isAuthenticated();
     console.log("isAuthenticated result:", isAuthenticatedResult);
     setAuthenticated(isAuthenticated());
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     console.log("authenticated state:", authenticated);
