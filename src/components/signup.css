@@ -36,20 +36,8 @@ form {
   width: 80%;
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form {
-  width: 350px;
-}
-
 .btn {
-  display: block;
   margin-top: 28px;
-  margin-left: 88px;
   width: 165px;
   height: 60px;
   border-radius: 30px;
@@ -80,4 +68,35 @@ form {
   cursor: pointer;
   display: block;
   text-decoration: none;
+}
+
+.select-role {
+  position: relative;
+  display: inline-block;
+  width: 200px; /* Add a width property */
+  padding: 10px; /* Add some padding */
+}
+
+.select-role select {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none; /* Remove default browser styling */
+  -webkit-appearance: none; /* Remove default browser styling for Safari */
+}
+
+.select-role select option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.select-role select option[selected] {
+  background-color: #f0f0f0; /* Highlight selected option */
+}
+
+.select-role select::-ms-expand {
+  display: none; /* Hide the arrow in IE */
 }

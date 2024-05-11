@@ -32,6 +32,10 @@ const LoginPage = () => {
     }
   };
 
+  const handleClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <div className="login">
       <h4>Login</h4>
@@ -65,6 +69,9 @@ const LoginPage = () => {
         {error && <div style={{ color: "red" }}>{error}</div>}
         <button type="submit" className="btn">
           Login
+        </button>
+        <button className="btn" onClick={handleClick}>
+          Signup
         </button>
       </form>
       {/* <a className="link" href="/signup">Sign Up</a> */}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "./components/login";
-import RegistrationPage from "./components/registration";
+import RegistrationPage from "./components/signup";
 import ReactFlowComponent from "./components/chart"; // Your existing ReactFlow component
 import { isAuthenticated } from "./components/authService"; // Your authentication service (functions to check authentication status)
 
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Route for Registration Page */}
-        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/signup" element={<RegistrationPage />} />
 
         {/* Route for Chart Page */}
         <Route
