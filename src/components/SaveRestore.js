@@ -16,7 +16,7 @@ export const SaveRestore = () => {
   const [showAddNodePopup, setShowAddNodePopup] = useState(false);
   const [rfInstance, setRfInstance] = useState(null);
   const { setViewport } = useReactFlow();
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -46,6 +46,7 @@ export const SaveRestore = () => {
         })
         .then((response) => {
           console.log("Email sequence saved successfully:", response.data);
+          setShowSuccessMessage(true);
         })
         .catch((error) => {
           console.error("Error saving email sequence:", error);
@@ -72,6 +73,7 @@ export const SaveRestore = () => {
         setEdges(edges);
         setViewport(viewport);
         console.log("Email sequence restored successfully:", response.data);
+        setShowSuccessMessage(true);
       })
       .catch((error) => {
         console.error("Error restoring email sequence:", error);
@@ -134,6 +136,10 @@ export const SaveRestore = () => {
     );
   };
 
+  const handleSuccessMessageClose = () => {
+    setShowSuccessMessage(false); // Close success message
+  };
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -160,6 +166,12 @@ export const SaveRestore = () => {
       <Panel>
         {showAddNodePopup && <AddNodePopup onAddNode={onAddNode} />}
       </Panel>
+      {showSuccessMessage && (
+        <div className="success-popup">
+          <p>Operation successful!</p>
+          <button onClick={handleSuccessMessageClose}>Close</button>
+        </div>
+      )}
     </ReactFlow>
   );
 };

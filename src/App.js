@@ -4,16 +4,15 @@ import LoginPage from "./components/login";
 import RegistrationPage from "./components/signup";
 import ReactFlowComponent from "./components/chart"; // Your existing ReactFlow component
 import { isAuthenticated } from "./components/authService"; // Your authentication service (functions to check authentication status)
-
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(isAuthenticated());
 
   useEffect(() => {
     // Check authentication status when component mounts
     const isAuthenticatedResult = isAuthenticated();
     console.log("isAuthenticated result:", isAuthenticatedResult);
     setAuthenticated(isAuthenticated());
-  }, [isAuthenticated]);
+  }, []);
 
   useEffect(() => {
     console.log("authenticated state:", authenticated);

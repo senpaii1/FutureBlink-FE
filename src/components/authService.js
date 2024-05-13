@@ -1,8 +1,8 @@
 // authService.js
 import axios from "axios";
 
-const BASE_URL = "https://futureblink-backend.onrender.com/api/auth"; // Change this to your backend API URL
-
+// const BASE_URL = "https://futureblink-backend.onrender.com/api/auth"; // Change this to your backend API URL
+const BASE_URL = "http://localhost:8000/api/auth";
 export const login = async (credentials) => {
   try {
     const response = await axios.post(`${BASE_URL}/login`, credentials);
