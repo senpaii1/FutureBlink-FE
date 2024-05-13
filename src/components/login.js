@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "./authService"; // Import the login function from authService
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -9,7 +12,7 @@ const LoginPage = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials((prevCredentials) => ({
@@ -19,6 +22,7 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const user = await login(credentials);
@@ -29,8 +33,14 @@ const LoginPage = () => {
       navigate("/chart");
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    console.log(loading, "loader");
+  }, [loading]);
 
   const handleClick = () => {
     navigate("/signup");
@@ -39,72 +49,55 @@ const LoginPage = () => {
   return (
     <div className="login">
       <h4>Login</h4>
-      <form onSubmit={handleSubmit}>
-        <div className="text_area">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-            defaultValue="username"
-            placeholder="Username"
-            className="text_input"
-            required
-          />
-        </div>
-        <div className="text_area">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            placeholder="Password"
-            defaultValue="password"
-            className="text_input"
-            required
-          />
-        </div>
-        {error && <div style={{ color: "red" }}>{error}</div>}
-        <button type="submit" className="btn">
-          Login
-        </button>
-        <button className="btn" onClick={handleClick}>
-          Signup
-        </button>
-      </form>
-      {/* <a className="link" href="/signup">Sign Up</a> */}
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="text_area">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              defaultValue="username"
+              placeholder="Username"
+              className="text_input"
+              required
+            />
+          </div>
+          <div className="text_area">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="Password"
+              defaultValue="password"
+              className="text_input"
+              required
+            />
+          </div>
+          {error && <div style={{ color: "red" }}>{error}</div>}
+          <button type="submit" className="btn">
+            Login
+          </button>
+          <button className="btn" onClick={handleClick}>
+            Signup
+          </button>
+        </form>
+      )}
     </div>
-    // <div>
-    //   <h2>Login</h2>
-    //   <form onSubmit={handleSubmit}>
-    //     <div>
-    //       <label htmlFor="username">Username or Email:</label>
-    //       <input
-    //         type="text"
-    //         id="username"
-    //         name="username"
-    //         value={credentials.username}
-    //         onChange={handleChange}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="password">Password:</label>
-    //       <input
-    //         type="password"
-    //         id="password"
-    //         name="password"
-    //         value={credentials.password}
-    //         onChange={handleChange}
-    //         required
-    //       />
-    //     </div>
-    //     {error && <div style={{ color: "red" }}>{error}</div>}
-    //     <button type="submit">Login</button>
-    //   </form>
-    // </div>
   );
 };
 
