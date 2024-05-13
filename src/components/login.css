@@ -1,12 +1,12 @@
 body {
-  background: linear-gradient(135deg, #1b8af1, #b58ded);
+  background: linear-gradient(135deg, #b8d2eb, #a489c9);
   height: 100vh;
   width: 100%;
   text-align: center;
 }
 
 h4 {
-  font-family: "Segoe UI", bold;
+  font-family: "Montserrat regular", bold;
   font-size: 35px;
   margin-top: 4rem;
   margin-bottom: 2rem;
@@ -29,7 +29,7 @@ form {
 }
 
 .text_input {
-  margin-top: 1.2rem;
+  margin-top: 0.2rem;
   font-family: "Montserrat regular";
   font-size: 20px;
   border: none;
