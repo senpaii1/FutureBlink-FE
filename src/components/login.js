@@ -4,6 +4,17 @@ import { useNavigate } from "react-router-dom";
 import "./login.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({
@@ -13,8 +24,10 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value, "Onchange");
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
       [name]: value,
@@ -38,12 +51,16 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(loading, "loader");
-  }, [loading]);
-
   const handleClick = () => {
     navigate("/signup");
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -62,32 +79,44 @@ const LoginPage = () => {
         </Box>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="text_area">
-            <input
-              type="text"
-              id="username"
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Username
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={"text"}
               name="username"
-              value={credentials.username}
+              // value={credentials.password}
               onChange={handleChange}
-              defaultValue="username"
-              placeholder="Username"
-              className="text_input"
-              required
+              label="username"
             />
-          </div>
-          <div className="text_area">
-            <input
-              type="password"
-              id="password"
+          </FormControl>
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
               name="password"
-              value={credentials.password}
+              // value={credentials.password}
               onChange={handleChange}
-              placeholder="Password"
-              defaultValue="password"
-              className="text_input"
-              required
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
             />
-          </div>
+          </FormControl>
           {error && <div style={{ color: "red" }}>{error}</div>}
           <button type="submit" className="btn">
             Login
