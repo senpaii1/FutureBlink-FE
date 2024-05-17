@@ -41,13 +41,13 @@ form {
   width: 165px;
   height: 60px;
   border-radius: 30px;
-  background: #b58ded;
+  background: #fbfbfb;
   border: none;
-  font-family: "Montserrat";
+  font-family: "Montserrat regular";
   font-size: 20px;
-  color: #ffffff;
+  color: #1a192b;
   box-shadow: 0 4px 8px 0 rgba(181, 141, 237, 0.7),
-    0 6px 20px 0 rgba(181, 141, 237, 0.9);
+    0 6px 20px 0 rgb(75 65 89 / 90%);
   cursor: pointer;
 }
 
